@@ -1,0 +1,94 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-development
+  namespace: development
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: alter.mulyadi@bankina.id
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-development
+    # Enable the HTTP-01 challenge provider
+    solvers:
+    - http01:
+        ingress:
+          class:  nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: proc-debit-dev.bankina.id-crt
+  namespace: development
+spec:
+  secretName: proc-debit-dev.bankina.id-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name:  letsencrypt-development
+  dnsNames:
+  - proc-debit-dev.bankina.id
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proc-debit-dev-bankina-ingress
+  namespace: development
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+    cert-manager.io/issuer: "letsencrypt-development"
+spec:
+  tls:
+  - hosts:
+    - proc-debit-dev.bankina.id
+    secretName: proc-debit-dev.bankina.id-tls
+  rules:
+  - host: proc-debit-dev.bankina.id
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: process-api-debit
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-api-debit
+  namespace: development
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: process-api-debit
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-api-debit
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: process-api-debit
+  template:
+    metadata:
+      labels:
+        app: process-api-debit
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - image: 'asia-southeast2-docker.pkg.dev/dina-dev-host-project/process-api-debit/latest'
+          imagePullPolicy: "Always"
+          name: process-api-debit
+          ports:
+            - containerPort: 8080

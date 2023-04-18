@@ -1,0 +1,93 @@
+{
+    "Version" : {
+        "ReleaseVersion" : "V1.0",
+        "TeamCreated" : "Digital Doraemon Team",
+        "VersionType" : "DEV",
+        "BranchName" : "dev",
+        "Notes" : "Loan"
+    },
+    "MainSetup" : {
+        "AppEnv" : "Local",
+        "ServiceName" : "Loan",
+        "ServiceType" : "Process",
+        "ServerHost" : "0.0.0.0:8080",
+        "Maxprocs" : "6",
+        "AppsDebug" : "debug",
+        "PrefixCode" : ""
+    },
+    "Logging" :{
+        "logFile" : {
+            "Active" : "true",
+            "FileName" : "logs/logTest",
+            "TimeFormat" : "01-02-2006 15:04:05",
+            "PrettyPrint" : "true"
+        },
+        "logErrorInsertDB" : {
+            "Active" : "true",
+            "FileName" : "logs/db",
+            "TimeFormat" : "01-02-2006 15:04:05",
+            "PrettyPrint" : "true"
+        },
+        "logPrint" : {
+            "Active" : "true",
+            "TimeFormat" : "01-02-2006 15:04:05",
+            "PrettyPrint" : "true"
+        }
+    },
+    "Database" :{
+        "Prefix" : "",
+        "SingularTable" : "true",
+        "IgnoreErrorNotFound" : "false",
+        "Color" : "true"
+    },
+    "InternalRouting" : {
+        "Base" : "",
+        "V1" : {
+            "Prefix" : "v1",
+            "BookingLoan": {
+                "Prefix" : "/",
+                "Send" : "/booking-loan"
+            },
+            "Installment": {
+                "Prefix" : "/",
+                "Send" : "/installment"
+            }
+        }
+    },
+    "ExternalRouting" : {
+        "Mambu" : {
+            "Host" : "https://mambu.sandbox.mambu.com/api",
+            "Version" : {
+                "V1" : {},
+                "V2" :  {
+                    "Path" : "Accept",
+                    "Value" : "application/vnd.mambu.v2+json"
+                }
+            },
+            "Header" : [
+                {
+                    "Path" : "Accept-Encoding",
+                    "Value" : "gzip, deflate, br"
+                },
+                {
+                    "Path" : "Content-Type",
+                    "Value" : "application/json"
+                },
+                {
+                    "Path" : "Authorization",
+                    "Value" : "Basic 23232323232"
+                }
+            ],
+            "Endpoint" : {
+                "Deposit":{
+                    "Accounts":{
+                        "GetById":{
+                            "Url":"/deposits/{depositAccountId}",
+                            "Method":"GET"
+                        }
+                    }
+                }
+            }
+        }
+    }  
+}

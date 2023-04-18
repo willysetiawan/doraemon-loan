@@ -1,0 +1,20 @@
+#build stage
+FROM golang:1.19-alpine3.17
+ENV GOPROXY=https://nexus.bankina.id/repository/dina-go-proxy
+
+WORKDIR /workspace
+COPY . .
+
+RUN apk add --no-cache git
+#RUN go mod download
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main
+
+#final stage
+FROM alpine:3.17
+ENV TZ=Asia/Jakarta
+RUN apk --no-cache add ca-certificates tzdata
+
+COPY --from=0 /workspace/main /main
+COPY --from=0 /workspace/env-dev.json ./env.json
+
+CMD ["./main"]

@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "768eb442-52ea-4df3-a0f5-167f4b172453",
+		"name": "Base Code",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"superadmin@mail.com\",\n\t\"password\": \"P4ssword\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v1/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "end point for one agent login"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/v1/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "end point for one agent login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dashboard",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"superadmin@mail.com\",\n\t\"password\": \"P4ssword\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/dashboard/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"dashboard",
+										"auth",
+										"login"
+									]
+								},
+								"description": "end point for one agent login"
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/dashboard/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"dashboard",
+										"auth",
+										"logout"
+									]
+								},
+								"description": "end point for one agent login"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "role",
+					"item": [
+						{
+							"name": "get role",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/dashboard/role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"dashboard",
+										"role"
+									]
+								},
+								"description": "end point for one agent login"
+							},
+							"response": []
+						},
+						{
+							"name": "get my role",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/dashboard/role/my-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"dashboard",
+										"role",
+										"my-role"
+									]
+								},
+								"description": "end point for one agent login"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable('token', jsonData.data.profile.token);"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"superadmin@mail.com\",\n\t\"password\": \"P4ssword\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				},
+				"description": "end point for one agent login"
+			},
+			"response": []
+		}
+	]
+}
