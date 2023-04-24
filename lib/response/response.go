@@ -10,9 +10,9 @@ import (
 
 type (
 	Response struct {
-		ResponseCode    string      `json:"response_code"`
-		ResponseMessage string      `json:"response_message"`
-		Data            interface{} `json:"data"`
+		ResponseCode    string      `json:"responseCode"`
+		ResponseMessage string      `json:"responseMessage"`
+		Data            interface{} `json:"data,omitempty"`
 		Meta            Meta        `json:"meta,omitempty"`
 	}
 	ResponsePagination struct {
@@ -28,32 +28,14 @@ type (
 		Total int64 `json:"total"`
 	}
 	Meta struct {
-		DebugParam string `json:"debug_param,omitempty"`
-		TraceID    string `example:"97125121-ea32-4ee0-8706-5b7375e83e94" json:"trace_id,omitempty"`
-	}
-	MetaErrMock struct {
-		DebugParam string `example:"Request Time Out" json:"debug_param"`
-		TraceID    string `example:"97125121-ea32-4ee0-8706-5b7375e83e94" json:"trace_id"`
+		DebugParam string `json:"debugParam,omitempty"`
+		TraceID    string `example:"97125121-ea32-4ee0-8706-5b7375e83e94" json:"traceId,omitempty"`
 	}
 )
 
 func JsonGen(c *gin.Context, res Response) {
 	code := http.StatusNotImplemented
 	code, _ = strconv.Atoi(res.ResponseCode)
-	// switch res.ResponseCode {
-	// case constant.CODE_SUCCESS:
-	// 	code = http.StatusOK
-	// 	res.ResponseMessage = constant.CODE_SUCCESS_MSG
-	// case constant.CODE_FAILED:
-	// 	code = http.StatusBadRequest
-	// 	res.ResponseMessage = constant.CODE_FAILED_MSG
-	// case constant.CODE_INTERNAL_SERVER_ERR:
-	// 	code = http.StatusInternalServerError
-	// 	res.ResponseMessage = constant.CODE_INTERNAL_SERVER_ERR_MSG
-	// case constant.CODE_PENDING:
-	// 	code = http.StatusOK
-	// 	res.ResponseMessage = constant.CODE_PENDING_MSG
-	// }
 	res.ResponseCode = env.String("MainSetup.PrefixCode", "") + res.ResponseCode
 	c.JSON(code, res)
 }

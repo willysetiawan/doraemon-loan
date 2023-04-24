@@ -11,9 +11,9 @@ type (
 		Email                string    `gorm:"column:email"`
 		CompanyName          string    `gorm:"column:companyName"`
 		EmployeeId           string    `gorm:"column:employeeId"`
-		InstallmentId        int8      `gorm:"column:installmentId"`
+		InstallmentId        int       `gorm:"column:installmentId"`
 		Amount               float64   `gorm:"column:amount"`
-		Status               string    `gorm:"column:status"`
+		Status               int       `gorm:"column:status"`
 		TaxIdentityImagePath string    `gorm:"column:taxIdentityImagePath"`
 		AgreeTermsCondition  bool      `gorm:"column:agreeTermsCondition"`
 		BookingCreatedAt     time.Time `gorm:"column:bookingCreatedAt"`

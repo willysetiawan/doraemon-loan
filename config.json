@@ -10,7 +10,7 @@
         "AppEnv" : "Local",
         "ServiceName" : "Loan",
         "ServiceType" : "Process",
-        "ServerHost" : "0.0.0.0:8080",
+        "ServerHost" : "0.0.0.0:8900",
         "Maxprocs" : "6",
         "AppsDebug" : "debug",
         "PrefixCode" : ""
@@ -51,6 +51,18 @@
             "Installment": {
                 "Prefix" : "/",
                 "Send" : "/installment"
+            },
+            "UploadWhitelist": {
+                "Prefix" : "/",
+                "Send" : "/upload-whitelist"
+            },
+            "Whitelist": {
+                "Prefix" : "/",
+                "Send" : "/whitelist"
+            },
+            "CheckWhitelist": {
+                "Prefix" : "/",
+                "Send" : "/whitelist/check"
             }
         }
     },

@@ -16,7 +16,6 @@ import (
 )
 
 func Postgresql() (*gorm.DB, error) {
-	fmt.Println("DSN >>>", dsn())
 	// return gorm.Open(postgres.New(postgres.Config{
 	// 	DSN: "user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai",
 	// 	PreferSimpleProtocol: true, // disables implicit prepared statement usage
@@ -40,22 +39,6 @@ func Postgresql() (*gorm.DB, error) {
 			},
 		),
 	})
-
-	// return gorm.Open(postgres.Open(dsn()), &gorm.Config{
-	// 	NamingStrategy: schema.NamingStrategy{
-	// 		TablePrefix:   env.String("Database.Prefix", ""),
-	// 		SingularTable: env.Bool("Database.SingularTable", true),
-	// 	},
-	// 	DisableForeignKeyConstraintWhenMigrating: true,
-	// 	Logger: logger.New(
-	// 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
-	// 		logger.Config{
-	// 			SlowThreshold: time.Second,                      // Slow SQL threshold
-	// 			LogLevel:      logger.Info,                      // Log level
-	// 			Colorful:      env.Bool("Database.Color", true), // Disable color
-	// 		},
-	// 	),
-	// })
 }
 
 func dsn() string {
