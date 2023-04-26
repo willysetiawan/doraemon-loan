@@ -23,4 +23,25 @@ type (
 		BookingNo   string `example:"2020102900000000000001" json:"bookingNo"`
 		BookingTime string `example:"2020102900000000000001" json:"bookingTime"`
 	}
+
+	ReqProcessBookingLoan struct {
+		BookingId string `example:"2020102900000000000001" json:"bookingId" validate:"required"`
+		Action    *bool  `example:"2020102900000000000001" json:"action" validate:"required"`
+	}
+
+	ResProcessBookingLoan struct {
+		BookingNo string `example:"2020102900000000000001" json:"bookingNo"`
+		Status    string `example:"2020102900000000000001" json:"status"`
+	}
+
+	ResGetListBookingLoan struct {
+		BookingId    string  `example:"KTA2002043423097" json:"bookingId"`
+		CustomerName string  `example:"Budi" json:"customerName"`
+		PhoneNumber  string  `example:"08527427327" json:"phoneNumber"`
+		CompanyName  string  `example:"PT. AAAA" json:"companyName"`
+		Installment  string  `example:"5 Bulan" json:"installment"`
+		Amount       float64 `example:"50000000" json:"amount"`
+		Status       string  `example:"Approved" json:"status"`
+		CreatedAt    string  `example:"2023-04-18 17:14:31.256179" json:"createdAt"`
+	}
 )

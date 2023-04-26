@@ -33,7 +33,7 @@ const (
 
 	MESSAGE_SUCCESS                          = "Successful"
 	MESSAGE_CREATED                          = "Created"
-	MESSAGE_NOT_FOUND                        = "Transaction not found"
+	MESSAGE_NOT_FOUND                        = "Data not found"
 	MESSAGE_INVALID_TOKEN                    = "Invalid Token"
 	MESSAGE_FORBIDDEN                        = "Forbidden"
 	MESSAGE_UNAUTHORIZED                     = "Unauthorized"

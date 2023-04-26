@@ -41,8 +41,8 @@ func (domain *whitelistService) CheckWhitelist(req models.ReqCheckWhitelist, res
 	}
 
 	if resData.EmployeeId == "" {
-		res.ResponseMessage = "Don't have access"
-		res.ResponseCode = strconv.Itoa(http.StatusForbidden)
+		res.ResponseMessage = constant.MESSAGE_UNAUTHORIZED
+		res.ResponseCode = strconv.Itoa(http.StatusUnauthorized)
 		return
 	} else {
 		res.ResponseMessage = constant.MESSAGE_SUCCESS

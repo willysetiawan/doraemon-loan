@@ -48,6 +48,14 @@
                 "Prefix" : "/",
                 "Send" : "/booking-loan"
             },
+            "ProcessBookingLoan": {
+                "Prefix" : "/",
+                "Send" : "/booking-loan/process"
+            },
+            "GetListBookingLoan": {
+                "Prefix" : "/",
+                "Send" : "/booking-loan/list"
+            },
             "Installment": {
                 "Prefix" : "/",
                 "Send" : "/installment"

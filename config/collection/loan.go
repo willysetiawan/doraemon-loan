@@ -13,9 +13,11 @@ func Loan(main *gin.RouterGroup) {
 	group := main.Group(env.String("InternalRouting.V1.Prefix", ""))
 	group.Use(middleware.ValidateSymetricSignature())
 	{
-		group.GET(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.GetInstallment)
-		group.POST(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.InsertInstallment)
+		group.GET(env.String("InternalRouting.V1.GetListBookingLoan.Send", ""), ctrl.GetListBookingLoan)
 		group.POST(env.String("InternalRouting.V1.BookingLoan.Send", ""), ctrl.BookingLoan)
+		group.PUT(env.String("InternalRouting.V1.ProcessBookingLoan.Send", ""), ctrl.ProcessBookingLoan)
 	}
+	group.GET(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.GetInstallment)
+	group.POST(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.InsertInstallment)
 
 }
