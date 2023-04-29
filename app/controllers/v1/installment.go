@@ -36,7 +36,7 @@ func InitInstallmentController() *installmentController {
 // @Success 200 {object} models.ResExampleSendSuccess
 // @Failure 400 {object} models.ResExampleSendError
 // @Router /v1/partner/check-data [post]
-func (ctrl *loanController) GetInstallment(c *gin.Context) {
+func (ctrl *installmentController) GetInstallment(c *gin.Context) {
 	logName := ctrl.Name + " Get Installment "
 	res := response.Response{
 		ResponseCode: constant.CODE_FAILED,
@@ -51,7 +51,7 @@ func (ctrl *loanController) GetInstallment(c *gin.Context) {
 
 }
 
-func (ctrl *loanController) InsertInstallment(c *gin.Context) {
+func (ctrl *installmentController) InsertInstallment(c *gin.Context) {
 	logName := ctrl.Name + " Insert Installment "
 	res := response.Response{
 		ResponseCode: constant.CODE_FAILED,
