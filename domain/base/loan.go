@@ -219,7 +219,7 @@ func (domain *loanService) ListBookingLoan(res *response.Response) {
 				CustomerName: element.CompanyName,
 				PhoneNumber:  element.PhoneNumber,
 				CompanyName:  element.CompanyName,
-				Installment:  strconv.Itoa(resInstallment.Value) + " " + resInstallment.Type,
+				Installment:  strconv.Itoa(resInstallment.InstallmentValue) + " " + resInstallment.InstallmentType,
 				Amount:       element.Amount,
 				Status:       statusBooking,
 				CreatedAt:    element.BookingCreatedAt.Format("2006-01-02T15:04:05+07:00"),

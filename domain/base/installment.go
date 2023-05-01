@@ -44,9 +44,9 @@ func (domain *installmentService) GetInstallment(res *response.Response) {
 	if len(resInstallment) > 0 {
 		for _, element := range resInstallment {
 			resData = append(resData, models.ResGetInstallment{
-				Id:           element.Key,
-				Name:         strconv.Itoa(element.Value) + " " + element.Type,
-				InterestRate: element.Interest,
+				Id:           element.InstallmentKey,
+				Name:         strconv.Itoa(element.InstallmentValue) + " " + element.InstallmentType,
+				InterestRate: element.InstallmentInterest,
 			})
 		}
 		res.Data = resData
@@ -64,14 +64,14 @@ func (domain *installmentService) GetInstallment(res *response.Response) {
 func (domain *installmentService) InsertInstallment(req models.ReqInstallment, res *response.Response) {
 	//Installment Payload
 	reqInstallment := dbmodels.Installment{
-		Key:       uuid.New().String(),
-		Value:     req.Value,
-		Type:      req.Type,
-		Interest:  req.InterestRate,
-		Active:    *req.Active,
-		CreatedAt: time.Time.Local(time.Now().UTC()),
-		CreatedBy: "Hardcode API",
-		UpdatedAt: &time.Time{},
+		InstallmentKey:       uuid.New().String(),
+		InstallmentValue:     req.Value,
+		InstallmentType:      req.Type,
+		InstallmentInterest:  req.InterestRate,
+		InstallmentActive:    *req.Active,
+		InstallmentCreatedAt: time.Time.Local(time.Now().UTC()),
+		InstallmentCreatedBy: "Hardcode API",
+		InstallmentUpdatedAt: &time.Time{},
 	}
 
 	//Check Conflict
@@ -83,7 +83,7 @@ func (domain *installmentService) InsertInstallment(req models.ReqInstallment, r
 		return
 	}
 
-	if resCheckData.Key != "" {
+	if resCheckData.InstallmentKey != "" {
 		res.ResponseMessage = "Installment already exist"
 		res.ResponseCode = strconv.Itoa(http.StatusConflict)
 		return
@@ -98,10 +98,10 @@ func (domain *installmentService) InsertInstallment(req models.ReqInstallment, r
 	}
 
 	resData := models.ResInsertInstallment{
-		Id:           reqInstallment.Key,
-		Name:         strconv.Itoa(reqInstallment.Value) + " " + reqInstallment.Type,
-		InterestRate: reqInstallment.Interest,
-		CreatedAt:    reqInstallment.CreatedAt.Format("2006-01-02T15:04:05+07:00"),
+		Id:           reqInstallment.InstallmentKey,
+		Name:         strconv.Itoa(reqInstallment.InstallmentValue) + " " + reqInstallment.InstallmentType,
+		InterestRate: reqInstallment.InstallmentInterest,
+		CreatedAt:    reqInstallment.InstallmentCreatedAt.Format("2006-01-02T15:04:05+07:00"),
 	}
 
 	res.ResponseCode = strconv.Itoa(http.StatusCreated)

@@ -37,7 +37,7 @@ func GetActiveInstallment(traceId string) ([]dbmodels.Installment, error) {
 	ctrlName := "DB - Get Installment"
 	trx := DB
 	var resInstallment []dbmodels.Installment
-	errInsert := trx.Where("active = ?", true).Find(&resInstallment).Error
+	errInsert := trx.Where("installmentActive = ?", true).Find(&resInstallment).Error
 	if errInsert != nil {
 		log.LogData(traceId, ctrlName, "DatabaseCon.Find", constant.LEVEL_LOG_ERROR, errInsert.Error())
 		log.LogPrintErrorInsertDB(nil, "DatabaseCon.Find")
@@ -50,7 +50,7 @@ func FindInstallment(traceId string, installmentId int) (dbmodels.Installment, e
 	ctrlName := "DB - Find Installment"
 	trx := DB
 	var resInstallment dbmodels.Installment
-	errInsert := trx.Where("id = ?", installmentId).Find(&resInstallment).Error
+	errInsert := trx.Where("installmentId = ?", installmentId).Find(&resInstallment).Error
 	if errInsert != nil {
 		log.LogData(traceId, ctrlName, "DatabaseCon.Find", constant.LEVEL_LOG_ERROR, errInsert.Error())
 		log.LogPrintErrorInsertDB(nil, "DatabaseCon.Find")
@@ -63,7 +63,7 @@ func CheckInstallment(traceId string, req models.ReqInstallment) (dbmodels.Insta
 	ctrlName := "DB - Check Installment"
 	trx := DB
 	var resInstallment dbmodels.Installment
-	errInsert := trx.Where("type = ? AND value = ?", req.Type, req.Value).Find(&resInstallment).Error
+	errInsert := trx.Where("installmentType = ? AND installmentValue = ?", req.Type, req.Value).Find(&resInstallment).Error
 	if errInsert != nil {
 		log.LogData(traceId, ctrlName, "DatabaseCon.Find", constant.LEVEL_LOG_ERROR, errInsert.Error())
 		log.LogPrintErrorInsertDB(nil, "DatabaseCon.Find")

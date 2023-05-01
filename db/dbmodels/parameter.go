@@ -4,15 +4,15 @@ import "time"
 
 type (
 	Installment struct {
-		Key       string     `gorm:"column:key"`
-		Value     int        `gorm:"column:value"`
-		Type      string     `gorm:"column:type"`
-		Interest  float32    `gorm:"column:interestRate"`
-		Active    bool       `gorm:"column:active"`
-		CreatedAt time.Time  `gorm:"column:createdAt"`
-		CreatedBy string     `gorm:"column:createdBy"`
-		UpdatedAt *time.Time `gorm:"column:updatedAt"`
-		UpdatedBy string     `gorm:"column:updatedBy"`
+		InstallmentKey       string     `gorm:"column:installmentKey"`
+		InstallmentValue     int        `gorm:"column:installmentValue"`
+		InstallmentType      string     `gorm:"column:installmentType"`
+		InstallmentInterest  float32    `gorm:"column:installmentInterestRate"`
+		InstallmentActive    bool       `gorm:"column:installmentActive"`
+		InstallmentCreatedAt time.Time  `gorm:"column:installmentCreatedAt"`
+		InstallmentCreatedBy string     `gorm:"column:installmentCreatedBy"`
+		InstallmentUpdatedAt *time.Time `gorm:"column:installmentUpdatedAt"`
+		InstallmentUpdatedBy string     `gorm:"column:installmentUpdatedBy"`
 	}
 )
 
