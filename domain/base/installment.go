@@ -50,13 +50,13 @@ func (domain *installmentService) GetInstallment(res *response.Response) {
 			})
 		}
 		res.Data = resData
+		res.ResponseCode = strconv.Itoa(http.StatusOK)
+		res.ResponseMessage = constant.MESSAGE_SUCCESS
 	} else {
+		res.ResponseCode = strconv.Itoa(http.StatusNotFound)
+		res.ResponseMessage = constant.MESSAGE_NOT_FOUND
 		res.Data = make([]interface{}, 0)
 	}
-
-	res.ResponseCode = strconv.Itoa(http.StatusOK)
-	res.ResponseMessage = constant.MESSAGE_SUCCESS
-
 	return
 
 }

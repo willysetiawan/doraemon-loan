@@ -10,7 +10,7 @@
         "AppEnv" : "Local",
         "ServiceName" : "Loan",
         "ServiceType" : "Process",
-        "ServerHost" : "0.0.0.0:8900",
+        "ServerHost" : "0.0.0.0:8100",
         "Maxprocs" : "6",
         "AppsDebug" : "debug",
         "PrefixCode" : ""

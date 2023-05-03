@@ -46,5 +46,6 @@ func init() {
 	v1 := Routers.Group(env.String("InternalRouting.Base", ""))
 	// collection.Example(v1)
 	collection.Loan(v1)
-	collection.Whitelist((v1))
+	collection.Installment(v1)
+	collection.Whitelist(v1)
 }
