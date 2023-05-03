@@ -66,7 +66,7 @@ func (domain *whitelistService) GetWhitelist(res *response.Response) {
 			resData = append(resData, models.ResGetWhitelist{
 				// Id:           element.I,
 				// Name:         strconv.Itoa(element.Value) + " " + element.Type,
-				Company:               element.PartnerName,
+				Partner:               element.PartnerName,
 				CIF:                   element.CIF,
 				EmployeeName:          element.EmployeeName,
 				EmployeeId:            element.EmployeeId,
@@ -94,7 +94,7 @@ func (domain *whitelistService) GetWhitelist(res *response.Response) {
 func (domain *whitelistService) AddWhitelist(req models.ReqWhitelist, res *response.Response) {
 	//Add Whitelist
 	reqWhitelist := dbmodels.Whitelist{
-		PartnerId:               req.CompanyId,
+		PartnerId:               req.PartnerId,
 		CIF:                     req.CIF,
 		EmployeeName:            req.EmployeeName,
 		EmployeeId:              req.EmployeeId,
@@ -142,7 +142,7 @@ func (domain *whitelistService) UploadWhitelist(req []models.ReqWhitelist, res *
 	// }
 	for _, element := range req {
 		bulkData = append(bulkData, dbmodels.Whitelist{
-			PartnerId:               element.CompanyId,
+			PartnerId:               element.PartnerId,
 			CIF:                     element.CIF,
 			EmployeeName:            element.EmployeeName,
 			EmployeeId:              element.EmployeeId,

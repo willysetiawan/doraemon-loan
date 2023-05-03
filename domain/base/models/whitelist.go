@@ -2,7 +2,7 @@ package models
 
 type (
 	ReqWhitelist struct {
-		CompanyId             string  `example:"2020102900000000000001" json:"companyId" validate:"required,numeric"`
+		PartnerId             string  `example:"2020102900000000000001" json:"partnerId" validate:"required,numeric"`
 		CIF                   string  `example:"2020102900000000000001" json:"cif" validate:"required,max=16,numeric" maxLength:"16"`
 		EmployeeName          string  `example:"2020102900000000000001" json:"employeeName" validate:"required,max=15,numeric" maxLength:"15"`
 		EmployeeId            string  `example:"Palembang" json:"employeeId" validate:"max=100,numeric" maxLength:"100"`
@@ -17,7 +17,7 @@ type (
 
 	ResGetWhitelist struct {
 		Id                    string  `example:"2020102900000000000001" json:"id,omitempty"`
-		Company               string  `example:"2020102900000000000001" json:"company,omitempty"`
+		Partner               string  `example:"2020102900000000000001" json:"partner,omitempty"`
 		CIF                   string  `example:"2020102900000000000001" json:"cif,omitempty"`
 		EmployeeName          string  `example:"2020102900000000000001" json:"employeeName,omitempty"`
 		EmployeeId            string  `example:"2020102900000000000001" json:"employeeId,omitempty"`

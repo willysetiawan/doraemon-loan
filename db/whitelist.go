@@ -46,10 +46,10 @@ func UpdateWhitelist(traceId string, req dbmodels.Whitelist) (bool, error) {
 	return true, nil
 }
 
-func GetWhitelist(traceId string) ([]dbmodels.JoinWhitelistCompany, error) {
+func GetWhitelist(traceId string) ([]dbmodels.JoinWhitelistPartner, error) {
 	ctrlName := "DB - Get Whitelist"
 	trx := DB
-	var resWhitelist []dbmodels.JoinWhitelistCompany
+	var resWhitelist []dbmodels.JoinWhitelistPartner
 	errInsert := trx.Raw(`SELECT * FROM m_whitelist INNER JOIN m_partner ON m_partner.id=m_whitelist."partnerId"`).Find(&resWhitelist).Error
 	if errInsert != nil {
 		log.LogData(traceId, ctrlName, "DatabaseCon.Find", constant.LEVEL_LOG_ERROR, errInsert.Error())

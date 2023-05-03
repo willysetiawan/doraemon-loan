@@ -4,8 +4,7 @@ import "time"
 
 type (
 	Whitelist struct {
-		PartnerId string `gorm:"column:partnerId"`
-		// CompanyName             string     `gorm:"column:companyName"`
+		PartnerId               string     `gorm:"column:partnerId"`
 		CIF                     string     `gorm:"column:employeeCif"`
 		EmployeeName            string     `gorm:"column:employeeName"`
 		EmployeeId              string     `gorm:"column:employeeId"`

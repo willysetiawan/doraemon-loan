@@ -1,7 +1,7 @@
 package dbmodels
 
 type (
-	JoinWhitelistCompany struct {
+	JoinWhitelistPartner struct {
 		Whitelist
 		Partner
 	}

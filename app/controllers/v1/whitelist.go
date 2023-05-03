@@ -321,9 +321,9 @@ func (ctrl *whitelistController) UploadWhitelist(c *gin.Context) {
 	defer log.LogFmtTemp("End " + logName)
 	// res.Meta.TraceID = traceID
 
-	reqCompanyId := c.Request.FormValue("companyId")
-	if reqCompanyId == "" {
-		res.ResponseMessage = "Company Id required"
+	reqPartnerId := c.Request.FormValue("partnerId")
+	if reqPartnerId == "" {
+		res.ResponseMessage = "Partner Id required"
 		response.JsonGen(c, res)
 		return
 	}
@@ -347,7 +347,7 @@ func (ctrl *whitelistController) UploadWhitelist(c *gin.Context) {
 		parseMaxLoanAmount, _ := strconv.ParseFloat(row[10], 64)
 		if index >= 0 {
 			req = append(req, models.ReqWhitelist{
-				CompanyId:             reqCompanyId,
+				PartnerId:             reqPartnerId,
 				CIF:                   row[1],
 				EmployeeName:          row[2],
 				EmployeeId:            row[3],
