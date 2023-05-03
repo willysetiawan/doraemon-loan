@@ -3,18 +3,14 @@ package base
 import (
 	"net/http"
 	"process-loan/db"
-	"process-loan/db/dbmodels"
 	"process-loan/domain/base/models"
 	"process-loan/lib/constant"
 	"process-loan/lib/response"
 	"strconv"
-	"time"
 )
 
 type WhitelistServiceInterface interface {
 	GetWhitelist(res *response.Response)
-	AddWhitelist(req models.ReqWhitelist, res *response.Response)
-	UploadWhitelist(req []models.ReqWhitelist, res *response.Response)
 	CheckWhitelist(req models.ReqCheckWhitelist, res *response.Response)
 }
 
@@ -87,87 +83,6 @@ func (domain *whitelistService) GetWhitelist(res *response.Response) {
 	res.ResponseCode = strconv.Itoa(http.StatusOK)
 	res.ResponseMessage = constant.MESSAGE_SUCCESS
 
-	return
-
-}
-
-func (domain *whitelistService) AddWhitelist(req models.ReqWhitelist, res *response.Response) {
-	//Add Whitelist
-	reqWhitelist := dbmodels.Whitelist{
-		PartnerId:               req.PartnerId,
-		CIF:                     req.CIF,
-		EmployeeName:            req.EmployeeName,
-		EmployeeId:              req.EmployeeId,
-		EmployeeIdentityNo:      req.EmployeeIdentityNo,
-		EmployeePhoneNumber:     req.EmployeeMobilePhoneNo,
-		Email:                   req.EmployeeEmail,
-		Salary:                  req.EmployeeSalary,
-		MaxLoanAmount:           req.MaxLoan,
-		EmployeeStatus:          req.EmployeeStatus,
-		ParticipatePayrollMonth: req.PayrollMonth,
-		WhitelistCreatedAt:      time.Time.Local(time.Now().UTC()),
-		WhitelistCreatedBy:      "Hardcode API",
-	}
-
-	_, errInsertWhitelist := db.InsertWhitelist(domain.TraceID, reqWhitelist)
-	if errInsertWhitelist != nil {
-		res.Meta.DebugParam = "Failed process whitelist"
-		res.ResponseMessage = constant.MESSAGE_BACKEND_SYSTEM_FAILURE
-		res.ResponseCode = strconv.Itoa(http.StatusInternalServerError)
-		return
-	}
-
-	res.ResponseCode = strconv.Itoa(http.StatusCreated)
-	res.ResponseMessage = constant.MESSAGE_CREATED
-	return
-
-}
-
-func (domain *whitelistService) UploadWhitelist(req []models.ReqWhitelist, res *response.Response) {
-	//Add Whitelist
-	var bulkData []dbmodels.Whitelist
-	// reqWhitelist := dbmodels.Whitelist{
-	// 	CompanyId:               req.CompanyId,
-	// 	CIF:                     req.CIF,
-	// 	EmployeeName:            req.EmployeeName,
-	// 	EmployeeIdentityNo:      req.EmployeeIdentityNo,
-	// 	EmployeePhoneNumber:     req.EmployeeMobilePhoneNo,
-	// 	Email:                   req.EmployeeEmail,
-	// 	Salary:                  req.EmployeeSalary,
-	// 	MaxLoanAmount:           req.MaxLoan,
-	// 	EmployeeStatus:          req.EmployeeStatus,
-	// 	ParticipatePayrollMonth: req.PayrollMonth,
-	// 	WhitelistCreatedAt:      time.Time.Local(time.Now().UTC()),
-	// 	WhitelistCreatedBy:      "Hardcode API",
-	// }
-	for _, element := range req {
-		bulkData = append(bulkData, dbmodels.Whitelist{
-			PartnerId:               element.PartnerId,
-			CIF:                     element.CIF,
-			EmployeeName:            element.EmployeeName,
-			EmployeeId:              element.EmployeeId,
-			EmployeeIdentityNo:      element.EmployeeIdentityNo,
-			EmployeePhoneNumber:     element.EmployeeMobilePhoneNo,
-			Email:                   element.EmployeeEmail,
-			Salary:                  element.EmployeeSalary,
-			EmployeeStatus:          element.EmployeeStatus,
-			MaxLoanAmount:           element.MaxLoan,
-			ParticipatePayrollMonth: element.PayrollMonth,
-			WhitelistCreatedAt:      time.Time.Local(time.Now().UTC()),
-			WhitelistCreatedBy:      "Hardcode API",
-		})
-	}
-
-	_, errInsertWhitelist := db.InsertBulkWhitelist(domain.TraceID, bulkData)
-	if errInsertWhitelist != nil {
-		res.Meta.DebugParam = "Failed process whitelist"
-		res.ResponseMessage = constant.MESSAGE_BACKEND_SYSTEM_FAILURE
-		res.ResponseCode = strconv.Itoa(http.StatusInternalServerError)
-		return
-	}
-
-	res.ResponseCode = strconv.Itoa(http.StatusCreated)
-	res.ResponseMessage = constant.MESSAGE_CREATED
 	return
 
 }

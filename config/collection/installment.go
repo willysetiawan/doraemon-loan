@@ -12,6 +12,5 @@ func Installment(main *gin.RouterGroup) {
 	group := main.Group(env.String("InternalRouting.V1.Prefix", ""))
 	{
 		group.GET(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.GetInstallment)
-		group.POST(env.String("InternalRouting.V1.Installment.Send", ""), ctrl.InsertInstallment)
 	}
 }
